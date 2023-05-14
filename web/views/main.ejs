@@ -1,0 +1,209 @@
+<head>
+    <title>Выбор действия</title>
+    <meta charset="utf-8" />
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+    <div style="font-size:24px">Новый тип эксперимента</div><br>
+    <form action="/new_type" method="post">
+        <label>Количество элементов в PMAI-пути</label><br>
+        <input name="n_pth" value="1" class="field"/><br><br>
+        <label>Количество постоянных параметров</label><br>
+        <input name="n_ccond" value="1" class="field"/><br><br>
+        <label>Количество переменных параметров</label><br>
+        <input name="n_vcond" value="1" class="field"/><br><br>
+        <label>Количество результатов</label><br>
+        <input name="n_result" value="1" class="field"/><br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Изменить тип эксперимента</div><br>
+    <form action="/upd_type" method="post">
+        <label>ID типа эксперимента</label><br>
+        <select name="type_id" class="field">
+            <% for (var i = 0; i < type_ids.length; i++) { %>
+                <option value=<%= type_ids[i].id %>> id:<%= type_ids[i].id %>; <%= type_ids[i].name %> </option>
+            <% } %>
+        </select> <br><br>
+        <label>Изменить поле имя</label><br>
+        <select name="ch_name">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить поле цель</label><br>
+        <select name="ch_goal">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить поле путь PMAI</label><br>
+        <select name="ch_pth">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Количество элементов в PMAI-пути</label><br>
+        <input name="n_pth" value="2" class="field"/><br><br>
+        <label>Изменить постоянные параметры</label><br>
+        <select name="ch_ccond">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить переменные параметры</label><br>
+        <select name="ch_vcond">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить результаты</label><br>
+        <select name="ch_result">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Удалить тип эксперимента</div><br>
+    <form action="/del_type" method="post">
+        <select name="type_id" class="field">
+            <% for (var i = 0; i < type_ids.length; i++) { %>
+                <option value=<%= type_ids[i].id %>> id:<%= type_ids[i].id %>; <%= type_ids[i].name %> </option>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Новый эксперимент</div><br>
+    <form action="/new_exp" method="post">
+        <label>ID соответствующего типа эксперимента</label><br>
+        <select name="type_id" class="field">
+            <% for (var i = 0; i < type_ids.length; i++) { %>
+                <option value=<%= type_ids[i].id %>> id:<%= type_ids[i].id %>; <%= type_ids[i].name %> </option>
+            <% } %>
+        </select> <br><br>
+        <label>Количество элементов в PMAI-пути</label><br>
+        <input name="n_pth" value="4" class="field"/><br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Изменить эксперимент</div><br>
+    <form action="/upd_exp" method="post">
+        <label>ID эксперимента</label><br>
+        <select name="exp_id" class="field">
+            <% for (var i = 0; i < exp_ids.length; i++) { %>
+                <option value=<%= exp_ids[i].id %>> id:<%= exp_ids[i].id %>; <%= exp_ids[i].exp_name %> </option>
+            <% } %>
+        </select> <br><br>
+        <label>Изменить поле имя</label><br>
+        <select name="ch_name">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить поле цель</label><br>
+        <select name="ch_goal">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить суперкомпьютер</label><br>
+        <select name="ch_sc">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить поле путь PMAI</label><br>
+        <select name="ch_pth">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Количество элементов в PMAI-пути</label><br>
+        <input name="n_pth" value="2" class="field"/><br><br>
+        <label>Изменить постоянные параметры</label><br>
+        <select name="ch_ccond">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Удалить эксперимент</div><br>
+    <form action="/del_exp" method="post">
+        <label>ID эксперимента</label><br>
+        <select name="exp_id" class="field">
+            <% for (var i = 0; i < exp_ids.length; i++) { %>
+                <option value=<%= exp_ids[i].id %>> id:<%= exp_ids[i].id %>; <%= exp_ids[i].exp_name %> </option>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Новый запуск</div><br>
+    <form action="/new_launch" method="post">
+        <label>ID соответствующего эксперимента</label><br>
+        <select name="exp_id" class="field">
+            <% for (var i = 0; i < exp_ids.length; i++) { %>
+                <option value=<%= exp_ids[i].id %>> id:<%= exp_ids[i].id %>; <%= exp_ids[i].exp_name %> </option>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Изменить запуск</div><br>
+    <form action="/upd_launch" method="post">
+        <label>ID запуска</label><br>
+        <select name="launch_id" class="field">
+            <% for (var i = 0; i < launch_ids.length; i++) { %>
+                <option value=<%= launch_ids[i].id %>> id:<%= launch_ids[i].id %> </option>
+            <% } %>
+        </select> <br><br>
+        <label>Изменить переменные параметры</label><br>
+        <select name="ch_vcond">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <label>Изменить результаты</label><br>
+        <select name="ch_result">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Удалить запуск</div><br>
+    <form action="/del_launch" method="post">
+        <label>ID запуска</label><br>
+        <select name="launch_id" class="field">
+            <% for (var i = 0; i < launch_ids.length; i++) { %>
+                <option value=<%= launch_ids[i].id %>> id:<%= launch_ids[i].id %> </option>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Частное представление</div><br>
+    <form method="post" action="/look">
+        <label>type_exp_id</label><br>
+        <select name="type_id" class="field">
+            <% for (var i = 0; i < type_ids.length; i++) { %>
+                <option value=<%= type_ids[i].id %>> id:<%= type_ids[i].id %>; <%= type_ids[i].name %> </option>
+            <% } %>
+        </select> <br><br>
+        <label>Показать все ID</label><br>
+        <select name="show_id">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Посмотреть все типы экспериментов с ID</div><br>
+    <form method="post" action="/type_ids">
+        <input type="submit" value="Перейти" />
+    </form>
+
+    <div style="font-size:24px">Скачать файлы, соответствующие запуску</div><br>
+    <form action="/download" method="post">
+        <label>ID запуска</label><br>
+        <select name="launch_id" class="field">
+            <% for (var i = 0; i < launch_ids.length; i++) { %>
+                <option value=<%= launch_ids[i].id %>> id:<%= launch_ids[i].id %> </option>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+</body>

@@ -1,0 +1,49 @@
+<h1 class="cover-heading">Таблица всех ID типов эксперимента</h1>
+
+<style>
+   table.tb { border-collapse: collapse; width:500px; }
+   .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+   .tb th { background-color: lightblue;}
+</style>
+<table class="tb", style="width: 100%">
+   <tr>
+      <th>Type ID</th>
+      <th>Name of type</th>
+      <th>Goal of type</th>
+      <th>PMAI-path</th>
+      <th>Constant conditions</th>
+      <th>Variable conditions</th>
+      <th>Results</th>
+   </tr>
+
+   <% for (var i = 0; i < types.length; i++) { %>
+      <tr>
+         <td><%= types[i].id %></td>
+         <td><%= types[i].name %></td>
+         <td><%= types[i].goal %></td>
+         <td>
+            <% if (types[i].path_to_type != null) { %>
+               <% for (var j = 0; j < types[i].path_to_type.length - 1; j++) { %>
+                  <%= types[i].path_to_type[j].name %>, 
+               <% } %>
+               <%= types[i].path_to_type[types[i].path_to_type.length - 1].name %>
+            <% } %>
+         </td>
+         <td>
+            <% for (var j = 0; types[i].ccond != null && j < types[i].ccond.length; j += 2) { %>
+               [<%= types[i].ccond[j] %>, <%= types[i].ccond[j+1] %>] 
+            <% } %>
+         </td>
+         <td>
+            <% for (var j = 0; types[i].vcond != null && j < types[i].vcond.length; j += 2) { %>
+               [<%= types[i].vcond[j] %>, <%= types[i].vcond[j+1] %>] 
+            <% } %>
+         </td>
+         <td>
+            <% for (var j = 0; types[i].result != null && j < types[i].result.length; j += 2) { %>
+               [<%= types[i].result[j] %>, <%= types[i].result[j+1] %>] 
+            <% } %>
+         </td>
+      </tr>
+   <% } %>
+</table>

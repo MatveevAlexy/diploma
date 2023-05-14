@@ -1,0 +1,30 @@
+<h1 class="cover-heading">exp</h1>
+
+<style>
+    table.tb { border-collapse: collapse; width:500px; }
+    .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+    .tb th { background-color: lightblue;}
+  </style>
+ <table class="tb", style="width: 65%">
+    <tr>
+      <th>id</th>
+      <th>type_exp_id</th>
+      <th>sc_id</th>
+      <th>exp_name</th>
+      <th>exp_goal</th>
+      <th>path_to_exp</th>
+      <th>ccond</th>
+    </tr>
+    
+    <% for (var i = 0; i < exp.length; i++) { %>
+    <tr>
+        <td><%= exp[i].id %></td>
+        <td><%= exp[i].type_exp_id %></td>
+        <td><%= exp[i].sc_id %></td>
+        <td><%= exp[i].exp_name %></td>
+        <td><%= exp[i].exp_goal %></td>
+        <td><%= JSON.stringify(exp[i].path_to_exp) %></td>
+        <td><%= JSON.stringify(exp[i].ccond) %></td>
+    </tr>
+    <% } %>
+ </table>

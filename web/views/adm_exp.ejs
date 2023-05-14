@@ -1,0 +1,74 @@
+<h1 class="cover-heading">Проверка предложенного изменения</h1>
+
+<style>
+   table.tb { border-collapse: collapse; width:500px; }
+   .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+   .tb th { background-color: lightblue;}
+ </style>
+<table class="tb", style="width: 100%">
+  <tr>
+    <th></th>
+    <th>Название типа</th>
+    <th>Цель типа</th>
+    <th>Название эксперимента</th>
+    <th>Цель эксперимента</th>
+    <th>PMAI-путь типа эксперимента</th>
+    <th>PMAI-путь эксперимента</th>
+    <th>ID суперкомпьютера</th>
+    <% for (var i = 0; type_exp.ccond != null && i < type_exp.ccond.length; i+=2) { %>
+      <th><%= type_exp.ccond[i]%>, <%= type_exp.ccond[i + 1]%></th>
+    <% } %>
+    <th>Пользователь</th>
+  </tr>
+  <% if (journal.operation != 0) { %>
+  <tr>
+    <td>До изменения</td>
+    <td><%= type_exp.name %></td>
+    <td><%= type_exp.goal %></td>
+    <td><%= exp.name %></td>
+    <td><%= exp.goal %></td>
+    <td><%= JSON.stringify(type_exp.path_to_type) %></td>
+    <td><%= JSON.stringify(exp.path_to_exp) %></td>
+    <td><%= exp.sc %></td>
+    <% for (var i = 0; exp.ccond != null && i < exp.ccond.length; i++) { %>
+      <th><%= exp.ccond[i] %></th>
+    <% } %>
+    <td><%= creator %></td>
+  </tr>
+  <% } %>
+  <% if (journal.operation != 2) { %>
+  <tr>
+    <td>После изменения</td>
+    <td><%= type_exp.name %></td>
+    <td><%= type_exp.goal %></td>
+    <td><%= new_exp.name %></td>
+    <td><%= new_exp.goal %></td>
+    <td><%= JSON.stringify(type_exp.path_to_type) %></td>
+    <td><%= JSON.stringify(new_exp.path_to_exp) %></td>
+    <td><%= new_exp.sc %></td>
+    <% for (var i = 0; exp.ccond != null && i < exp.ccond.length; i++) { %>
+      <th><%= new_exp.ccond[i] %></th>
+    <% } %>
+    <td><%= changer %></td>
+  </tr>
+  <% } %>
+</table>
+
+<% if (journal.state == 0) { %>
+  <body>
+    <div style="font-size:24px">Подтверждение изменений</div><br>
+    <form action="/posted" method="post">
+      <select name="status">
+        <option value=1 selected>Подтвердить</option>
+        <option value=2>Отклонить</option>
+      </select> <br><br>
+      <input type="submit" value="Перейти" />
+    </form>
+    <script>
+      var form = document.querySelector("form");
+      form.addEventListener("submit", event => {
+          console.log(form.elements.value.value);
+      });
+    </script> 
+  </body>
+<% } %>

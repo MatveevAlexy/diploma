@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# создаем "с нуля" ветку в git
+server="git@server_ip"
+repoDir="Algo500.data"
+currDir=$(pwd)		# текущая директория
+rootDir=$1		# корневая директория, локальная для git репозитория 
+uid=$2			# идентификатор пользователя
+teid=$3			# идентификатор типа эксперимента
+eid=$4			# идентификатор эксперимента
+lid=$5			# идентификатор запуска
+if [ "$#" -lt 5 ]; then
+    echo "Недостаточно аргументов"
+    exit 1
+fi
+#
+cd $rootDir
+if [ -d $uid ]; then
+    cd $uid/$repoDir
+    git checkout -b "${teid}_${eid}_${lid}"
+    git add .
+    git commit -a -m "Create ${teid}_${eid}_${lid} branch" 
+    git push -u origin "${teid}_${eid}_${lid}"
+fi
+#
+cd $currDir
+

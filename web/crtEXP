@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Создаем "с нуля" папку для эксперимента
+server="git@server_ip"
+repoDir="Algo500.data"
+currDir=$(pwd)		# текущая директория
+rootDir=$1		# корневая директория, локальная для git репозитория 
+uid=$2			# идентификатор пользователя
+teid=$3			# идентификатор типа эксперимента
+eid=$4			# идентификатор эксперимента
+if [ "$#" -lt 4 ]; then
+    echo "Недостаточно аргументов"
+    echo $server:$repoDir
+    exit 1
+fi
+#
+cd $rootDir
+if ! [ -d $uid ]; then
+    mkdir $uid
+else
+    cd $uid; rm -fr *; cd ..
+fi
+#
+cd $uid
+x=$(git clone --branch="$teid" $server:$repoDir)
+echo $x
+cd $rootDir/$uid/$repoDir/$teid
+#
+if [ ! -z $4 ]; then
+    if [ ! -d $eid ]; then
+	mkdir $eid
+	cd $eid
+	cp $currDir/templates/README_EXP.MD README.MD
+    fi
+fi
+cd $currDir
+

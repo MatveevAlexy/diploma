@@ -1,0 +1,56 @@
+<head>
+    <title>Изменение эксперимента</title>
+    <meta charset="utf-8" />
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+    <form action="/upd_exp/posted" method="post">
+        <div>Изменение эксперимента</div><br>
+        <% if (ch_name == 1) { %>
+            <label>Имя</label><br>
+            <input name="name" class="field"/><br><br>
+        <% } %>
+        <% if (ch_goal == 1) { %>
+            <label>Цель</label><br>
+            <input name="goal" class="field"/><br><br>
+        <% } %>
+        <% if (ch_sc == 1) { %>
+            <label>Cуперкомпьютер</label><br>
+            <select name="sc_id" class="field">
+                <% for (var i = 0; i < scomps.length; i++) { %>
+                    <option value=<%= scomps[i].id %>> <%= scomps[i].sc_nm_ru %> </option>
+                <% } %>
+            </select> <br><br>
+        <% } %>
+        <% if (ch_pth == 1 && n_pth > 0) { %>
+            <div>PMAI-путь</div><br>
+            <% for (var i = 0; i < n_pth; i++) { %>
+                <label>Полное название</label><br>
+                <input name=<%="pth_ref"+i %> class="field"/><br><br>
+                <label>Краткое название</label><br>
+                <input name=<%="pth_name"+i %> class="field"/><br><br>
+                <label>Тип элемента</label><br>
+                <select name=<%="pth_type"+i %>  class="field"/>
+                    <option value="?" selected>?</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="A">A</option>
+                    <option value="I">I</option>
+                </select> <br><br>
+            <% } %>
+        <% } %>
+        <% if (ch_ccond == 1) { %>
+            <% for (var i = 0; ccond != null && i < ccond.length; i += 2) { %>
+                <label>Постоянный параметр <%= ccond[i] %>, единицы измерения: <%= ccond[i + 1] %></label><br>
+                <input name=<%="ccond"+i%> class="field"/><br><br>
+            <% } %>
+        <% } %>
+        <input type="submit" value="Сохранить" />
+    </form> 
+    <script>
+        var form = document.querySelector("form");
+        form.addEventListener("submit", event => {
+            console.log(form.elements.value.value);
+        });
+    </script> 
+</body>

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Создаем "с нуля" папку для типа эксперимента
+currDir=$(pwd)		# текущая директория
+rootDir=$1		# корневая директория, локальная для git репозитория 
+uid=$2			# идентификатор пользователя
+teid=$3			# идентификатор типа эксперимента
+if [ "$#" -lt 3 ]; then
+    echo "Недостаточно аргументов"
+    exit 1
+fi
+#
+cd $rootDir
+if ! [ -d $uid ]; then
+    mkdir $uid
+fi
+#
+cd $uid
+if [ ! -z $3 ]; then
+    if [ ! -d $teid ]; then
+	mkdir $teid
+	cd $teid
+	mkdir common
+	cp $currDir/templates/README_COMMON.MD common/README.MD
+	cp $currDir/templates/README_TE.MD README.MD
+    fi
+fi
+cd $currDir
+

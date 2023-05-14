@@ -1,0 +1,56 @@
+<head>
+    <title>Новый тип эксперимента</title>
+    <meta charset="utf-8" />
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+    <form action="/new_type/posted" method="post" encType="multipart/form-data">
+        <div>Новый тип эксперимента</div><br>
+        <label>Имя</label><br>
+        <input name="name" class="field"/><br><br>
+        <label>Цель</label><br>
+        <input name="goal" class="field"/><br><br>
+        <div>PMAI-путь</div><br>
+        <% for (var i = 0; i < n_pth; i++) { %>
+            <label>Полное название</label><br>
+            <input name=<%="pth_ref"+i %> class="field"/><br><br>
+            <label>Краткое название</label><br>
+            <input name=<%="pth_name"+i %> class="field"/><br><br>
+            <label>Тип элемента</label><br>
+            <select name=<%="pth_type"+i %>  class="field"/>
+                <option value="?" selected>?</option>
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="A">A</option>
+                <option value="I">I</option>
+            </select> <br><br>
+        <% } %>
+        <% for (var i = 0; i < n_ccond; i++) { %>
+            <label>Постоянный параметр</label><br>
+            <input name=<%="ccond"+i%> class="field"/><br><br>
+            <label>Единицы измерения постоянного параметра</label><br>
+            <input name=<%="ccond_unit"+i%> class="field"/><br><br>
+         <% } %>
+         <% for (var i = 0; i < n_vcond; i++) { %>
+            <label>Переменный параметр</label><br>
+            <input name=<%="vcond"+i%> class="field"/><br><br>
+            <label>Единицы измерения переменного параметра</label><br>
+            <input name=<%="vcond_unit"+i%> class="field"/><br><br>
+         <% } %>
+         <% for (var i = 0; i < n_result; i++) { %>
+            <label>Результат</label><br>
+            <input name=<%="result"+i%> class="field"/><br><br>
+            <label>Единицы измерения результата</label><br>
+            <input name=<%="result_unit"+i%> class="field"/><br><br>
+         <% } %>
+         <label>Дополнительные файлы</label><br>
+        <input type="file" name="gits" multiple /><br><br>
+        <input type="submit" value="Сохранить" />
+    </form> 
+    <script>
+        var form = document.querySelector("form");
+        form.addEventListener("submit", event => {
+            console.log(form.elements.value.value);
+        });
+    </script> 
+</body>

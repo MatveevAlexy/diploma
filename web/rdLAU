@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# читаем из git ветку TEi_EXPj_Lk
+server="git@server_ip"
+repoDir="Algo500.data"
+currDir=$(pwd)		# текущая директория
+rootDir=$1		# корневая директория, локальная для git репозитория 
+uid=$2			# идентификатор пользователя
+teid=$3			# идентификатор типа эксперимента
+eid=$4			# идентификатор эксперимента
+lid=$5			# идентификатор запуска
+if [ "$#" -lt 5 ]; then
+    echo "Недостаточно аргументов"
+    exit 1
+fi
+#
+cd $rootDir
+if [ ! -d $uid ]; then
+    mkdir $uid
+else
+    cd $uid; rm -fr *; cd ..
+fi
+#
+cd $uid
+$(git clone --branch="${teid}_${eid}_${lid}" ${server}:${repoDir})
+if [ -d $repoDir ]; then
+    cd $repoDir
+    zip -r ${teid}_${eid}_${lid}.zip ${teid}
+    exit 0
+else
+    echo "ошибка.. "
+    exit 1
+fi

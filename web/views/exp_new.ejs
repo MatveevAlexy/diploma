@@ -1,0 +1,50 @@
+<head>
+    <title>Новый эксперимент</title>
+    <meta charset="utf-8" />
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+    <form action="/new_exp/posted" method="post" encType="multipart/form-data">
+        <div>Новый эксперимент</div><br>
+        <label>Имя</label><br>
+        <input name="name" class="field"/><br><br>
+        <label>Цель</label><br>
+        <input name="goal" class="field"/><br><br>
+        <label>Суперкомпьютер</label><br>
+        <select name="sc_id" class="field">
+            <% for (var i = 0; i < scomps.length; i++) { %>
+                <option value=<%= scomps[i].id %>> <%= scomps[i].sc_nm_ru %> </option>
+            <% } %>
+        </select> <br><br>
+        <% if (n_pth > 0) { %>
+            <div>PMAI-путь</div><br>
+            <% for (var i = 0; i < n_pth; i++) { %>
+                <label>Полное название</label><br>
+                <input name=<%="pth_ref"+i %> field><br><br>
+                <label>Краткое название</label><br>
+                <input name=<%="pth_name"+i %> field><br><br>
+                <label>Тип элемента</label><br>
+                <select name=<%="pth_type"+i %>  field>
+                    <option value="?" selected>?</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="A">A</option>
+                    <option value="I">I</option>
+                </select> <br><br>
+            <% } %>
+        <% } %>
+        <% for (var i = 0; ccond != null && i < ccond.length; i += 2) { %>
+            <label>Постоянный параметр <%= ccond[i] %>, единицы измерения: <%= ccond[i + 1] %></label><br>
+            <input name=<%="ccond"+i%> field><br><br>
+        <% } %>
+        <label>Дополнительные файлы</label><br>
+        <input type="file" name="gits" multiple><br><br>
+        <input type="submit" value="Сохранить" />
+    </form> 
+    <script>
+        var form = document.querySelector("form");
+        form.addEventListener("submit", event => {
+            console.log(form.elements.value.value);
+        });
+    </script> 
+</body>

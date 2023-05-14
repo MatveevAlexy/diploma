@@ -1,0 +1,25 @@
+<head>
+    <title>Выбор действия</title>
+    <meta charset="utf-8" />
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+    <div style="font-size:24px">Просмотр изменений</div><br>
+    <form action="/check" method="post">
+        <select name="journal_id" class="field">
+            <% for (var i = 0; i < j_ids.length; i++) { %>
+                <option value=<%= j_ids[i].id %>> id:<%= j_ids[i].id %> </option>
+            <% } %>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+    <div style="font-size:24px">Просмотр журнала</div><br>
+    <form action="/look" method="post">
+        <label>Показывать проверенные записи журнала?</label><br>
+        <select name="all">
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select> <br><br>
+        <input type="submit" value="Перейти" />
+    </form>
+</body>

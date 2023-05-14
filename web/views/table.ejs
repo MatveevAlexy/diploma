@@ -1,0 +1,62 @@
+<h1 class="cover-heading">Table for type_exp_id = <%= type_id%></h1>
+
+<style>
+   table.tb { border-collapse: collapse; width:500px; }
+   .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+   .tb th { background-color: lightblue;}
+ </style>
+<table class="tb", style="width: 100%">
+   <tr>
+     <% if (show_id == 1) { %>
+        <th>Type ID</th>
+     <% } %>
+     <th>Name of type</th>
+     <th>Goal of type</th>
+     <% if (show_id == 1) { %>
+        <th>Exp ID</th>
+     <% } %>
+     <th>Name of experiment</th>
+     <th>Goal of experiment</th>
+     <th>Sc</th>
+     <% for (var i = 0; type.ccond != null && i < type.ccond.length; i+=2) { %>
+        <th><%= type.ccond[i]%>, <%= type.ccond[i + 1]%></th>
+     <% } %>
+     <% if (show_id == 1) { %>
+        <th>Launch ID</th>
+     <% } %>
+     <% for (var i = 0; type.vcond != null && i < type.vcond.length; i+=2) { %>
+        <th><%= type.vcond[i]%>, <%= type.vcond[i + 1]%></th>
+     <% } %>
+     <% for (var i = 0; type.result != null && i < type.result.length; i+=2) { %>
+      <th><%= type.result[i]%>, <%= type.result[i + 1]%></th>
+      <% } %>
+   </tr>
+
+   <% for (var i = 0; i < launch.length; i++) { %>
+     <tr>
+        <% if (show_id == 1) { %>
+           <td> <%= type.id %> </td>
+        <% } %>
+        <td><%= type.name %></td>
+        <td><%= type.goal %></td>
+        <% if (show_id == 1) { %>
+           <td><%= exp[exp_num[i]].id %></td>
+        <% } %>
+        <td><%= exp[exp_num[i]].exp_name %></td>
+        <td><%= exp[exp_num[i]].exp_goal %></td>
+        <td><%= scomps.find(item => item.id == exp[exp_num[i]].sc_id).sc_nm_ru %></td>
+        <% for (var j = 0; exp[exp_num[i]].ccond != null && j < exp[exp_num[i]].ccond.length; j++) { %>
+           <td><%= exp[exp_num[i]].ccond[j] %></td>
+        <% } %>
+        <% if (show_id == 1) { %>
+           <td><%= launch[i].id %></td>
+        <% } %>
+        <% for (var j = 0; launch[i].vcond != null && j < launch[i].vcond.length; j++) { %>
+           <td><%= launch[i].vcond[j] %></td>
+        <% } %>
+        <% for (var j = 0; launch[i].result != null && j < launch[i].result.length; j++) { %>
+         <td><%= launch[i].result[j] %></td>
+      <% } %>
+     </tr>
+   <% } %>
+</table>

@@ -1,0 +1,47 @@
+<h1 class="cover-heading">Просмотр журнала</h1>
+
+<style>
+   table.tb { border-collapse: collapse; width:500px; }
+   .tb th, .tb td { padding: 5px; border: solid 1px #777; }
+   .tb th { background-color: lightblue;}
+ </style>
+<table class="tb", style="width: 100%">
+  <tr>
+    <th>ID</th>
+    <th>Таблица</th>
+    <th>ID в таблице</th>
+    <th>Операция</th>
+    <% if (show_all == 1) { %>
+        <th>Статус</th>
+    <% } %>
+    <th>Пользователь</th>
+    <% if (show_all == 1) { %>
+        <th>Модератор</th>
+    <% } %>
+    <th>Изменённые столбцы</th>
+    <th>Старые значения</th>
+    <th>Новые значения</th>
+  </tr>
+    <% for (var i = 0; i < journal.length; i++) { %>
+        <tr>
+            <td><%= journal[i].id %></td>
+            <td><%= journal[i].name_of_table %></td>
+            <td><%= journal[i].foreign_id %></td>
+            <td><%= ['Создание', 'Изменение', 'Удаление'][journal[i].operation] %></td>
+            <% if (show_all == 1) { %>
+                <td><%= ['Ожидает', 'Подтверждено', 'Отклонено'][journal[i].state] %></td>
+            <% } %>
+            <td><%= journal[i].user %></td>
+            <% if (show_all == 1) { %>
+                <% if (journal[i].state != 0) { %>
+                    <td><%= journal[i].moder %></td>
+                <% } else {%>
+                <td></td>
+                <% } %>
+            <% } %>
+            <td><%= JSON.stringify(journal[i].col_set) %></td>
+            <td><%= JSON.stringify(journal[i].old_val_set) %></td>
+            <td><%= JSON.stringify(journal[i].new_val_set) %></td>
+        </tr>
+    <% } %>
+</table>

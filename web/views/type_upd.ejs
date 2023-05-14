@@ -1,0 +1,66 @@
+<head>
+    <title>Изменение типа эксперимента</title>
+    <meta charset="utf-8" />
+    <style>.field{width:180px;}</style>
+</head>
+<body>
+    <form action="/upd_type/posted" method="post">
+        <div>Изменение типа эксперимента</div><br>
+        <% if (ch_name == 1) { %>
+            <label>Имя</label><br>
+            <input name="name" class="field"/><br><br>
+        <% } %>
+        <% if (ch_goal == 1) { %>
+            <label>Цель</label><br>
+            <input name="goal" class="field"/><br><br>
+        <% } %>
+        <% if (ch_pth == 1) { %>
+            <div>PMAI-путь</div><br>
+            <% for (var i = 0; i < n_pth; i++) { %>
+                <label>Полное название</label><br>
+                <input name=<%="pth_ref"+i %> class="field"/><br><br>
+                <label>Краткое название</label><br>
+                <input name=<%="pth_name"+i %> class="field"/><br><br>
+                <label>Тип элемента</label><br>
+                <select name=<%="pth_type"+i %>  class="field"/>
+                    <option value="?" selected>?</option>
+                    <option value="P">P</option>
+                    <option value="M">M</option>
+                    <option value="A">A</option>
+                    <option value="I">I</option>
+                </select> <br><br>
+            <% } %>
+        <% } %>
+        <% if (ch_ccond == 1) { %>
+            <% for (var i = 0; i < n_ccond; i++) { %>
+                <label>Постоянный параметр. Было: <%= ccond[2*i] %></label><br>
+                <input name=<%="ccond"+i%> class="field"/><br><br>
+                <label>Единицы измерения постоянного параметра. Было <%= ccond[2*i+1] %></label><br>
+                <input name=<%="ccond_unit"+i%> class="field"/><br><br>
+            <% } %>
+        <% } %>
+        <% if (ch_vcond == 1) { %>
+            <% for (var i = 0; i < n_vcond; i++) { %>
+                <label>Переменный параметр. Было: <%= vcond[2*i] %></label><br>
+                <input name=<%="vcond"+i%> class="field"/><br><br>
+                <label>Единицы измерения переменного параметра. Было: <%= vcond[2*i+1] %></label><br>
+                <input name=<%="vcond_unit"+i%> class="field"/><br><br>
+            <% } %>
+        <% } %>
+        <% if (ch_result == 1) { %>
+            <% for (var i = 0; i < n_result; i++) { %>
+                <label>Результат. Было: <%= result[2*i] %></label><br>
+                <input name=<%="result"+i%> class="field"/><br><br>
+                <label>Единицы измерения результата. Было: <%= result[2*i+1] %></label><br>
+                <input name=<%="result_unit"+i%> class="field"/><br><br>
+            <% } %>
+        <% } %>
+        <input type="submit" value="Сохранить" />
+    </form> 
+    <script>
+        var form = document.querySelector("form");
+        form.addEventListener("submit", event => {
+            console.log(form.elements.value.value);
+        });
+    </script> 
+</body>
